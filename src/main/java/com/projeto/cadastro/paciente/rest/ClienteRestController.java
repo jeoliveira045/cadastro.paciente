@@ -27,9 +27,9 @@ public class ClienteRestController {
          return ResponseEntity.ok().body(service.cadastrarCliente(cliente1));
     }
 
-    @GetMapping(value="/lista-de-espera")
-    public ResponseEntity<List<ClienteDTO>> listaDeEspera(){
-        return ResponseEntity.ok().body(service.listaDeEspera());
+    @GetMapping(value="/lista-de-cadastrados")
+    public ResponseEntity<List<ClienteDTO>> listaDeCadastrados(){
+        return ResponseEntity.ok().body(service.listaDeCadastrados());
     }
 
     @GetMapping(value="{id}")
@@ -41,6 +41,11 @@ public class ClienteRestController {
     public ResponseEntity<Void> deletarListaDeEspera(@PathVariable Integer id){
         service.deletarById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(value="/lista-de-espera/{cpf}")
+    public ResponseEntity<List<ClienteDTO>> listaDeEspera(@PathVariable Long cpf) throws Exception {
+        return ResponseEntity.ok().body(service.listaDeEspera(cpf));
     }
     
 }

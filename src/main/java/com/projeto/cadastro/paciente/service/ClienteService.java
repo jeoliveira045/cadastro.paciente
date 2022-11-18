@@ -1,5 +1,6 @@
 package com.projeto.cadastro.paciente.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,8 +58,18 @@ public class ClienteService {
         return entity;
     }
 
-    public List<ClienteDTO> listaDeEspera(){
+    public List<ClienteDTO> listaDeCadastrados(){
         return repository.findAll().stream().map(entity -> toDTO(entity)).collect(Collectors.toList());
+    }
+
+    public List<ClienteDTO> listaDeEspera(Long cpf) throws Exception{
+        List<ClienteDTO> listadeEspera = new ArrayList<>();
+        listadeEspera.add(toDTO(repository.findByCpf(cpf).get(0)));
+        if(listadeEspera.get(listadeEspera.size()-1).getProblema().getGrauDeUrgencia() == "Alta"){
+            
+        }
+        return listadeEspera;
+
     }
     public Cliente dadosDoCliente(Integer id){
         return repository.findById(id).get();
