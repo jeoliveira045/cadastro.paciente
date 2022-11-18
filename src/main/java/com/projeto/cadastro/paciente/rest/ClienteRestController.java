@@ -28,7 +28,7 @@ public class ClienteRestController {
     }
 
     @GetMapping(value="/lista-de-espera")
-    public ResponseEntity<List<Cliente>> listaDeEspera(){
+    public ResponseEntity<List<ClienteDTO>> listaDeEspera(){
         return ResponseEntity.ok().body(service.listaDeEspera());
     }
 

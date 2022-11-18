@@ -1,6 +1,7 @@
 package com.projeto.cadastro.paciente.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,8 +57,8 @@ public class ClienteService {
         return entity;
     }
 
-    public List<Cliente> listaDeEspera(){
-        return repository.findAll();
+    public List<ClienteDTO> listaDeEspera(){
+        return repository.findAll().stream().map(entity -> toDTO(entity)).collect(Collectors.toList());
     }
     public Cliente dadosDoCliente(Integer id){
         return repository.findById(id).get();
@@ -67,6 +68,6 @@ public class ClienteService {
         repository.deleteById(id);
     }
 
-    
+
 
 }
